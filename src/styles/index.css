@@ -133,3 +133,38 @@
 #projects .project-disclosure p { margin-bottom: 12px; }
 #projects .project-disclosure .project-details { margin-block: 8px 18px; }
 #projects .project-model-note { font-size: 11px; }
+
+.hero-copy { min-width: 0; }
+.hero .hero-identity {
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  line-height: 1.9;
+  max-width: 580px;
+}
+.hero-copy h1 { max-width: 620px; text-wrap: balance; }
+.hero-specialties {
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+.hero-description {
+  max-width: 560px;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+.hero-tagline {
+  max-width: 540px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+@media (max-width: 700px) {
+  .hero .hero-identity { font-size: 9px; letter-spacing: 1.1px; }
+  .hero-description { font-size: 14px; }
+  .hero-tagline { font-size: 18px; }
+}

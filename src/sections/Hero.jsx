@@ -3,10 +3,12 @@ import { profile } from '../data/profile.js'
 
 export default function Hero() {
   return <section id="home" className="shell hero" aria-labelledby="hero-title">
-    <div>
-      <p className="eyebrow">● Engineer by craft. Curious by nature.</p>
-      <h1 id="hero-title">Driven by curiosity.<br />Building technology<br />for a <em>better life.</em></h1>
-      <p className="hero-role">{profile.name}<br /><span>{profile.role}</span></p>
+    <div className="hero-copy">
+      <p className="eyebrow hero-identity">{profile.name} · {profile.role}</p>
+      <h1 id="hero-title">{profile.introduction.headline}</h1>
+      <p className="hero-specialties">{profile.introduction.specialties}</p>
+      <p className="hero-description">{profile.introduction.description}</p>
+      <p className="hero-tagline">{profile.introduction.tagline}</p>
       <a className="button" href="#work">Explore work <span aria-hidden="true">↗</span></a>
     </div>
     <SignatureAnimation />
