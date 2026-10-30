@@ -13,5 +13,5 @@ export const profile = {
   mission: 'Build AI-powered tools that solve practical problems and help people live better lives.',
   github: 'https://github.com/Ruchi2729',
   linkedin: 'https://www.linkedin.com/in/ruchirapatil/',
-  resume: null,
+  resume: '/Resume-Full-Stack-Updated.pdf',
 }

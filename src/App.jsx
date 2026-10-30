@@ -23,7 +23,7 @@ export default function App() {
         <div className="contact-links">
           <a className="text-link" href={profile.github}>GitHub <span aria-hidden="true">↗</span></a>
           {profile.linkedin && <a className="text-link" href={profile.linkedin}>LinkedIn <span aria-hidden="true">↗</span></a>}
-          {profile.resume && <a className="text-link" href={profile.resume}>Resume <span aria-hidden="true">↗</span></a>}
+          {profile.resume && <a className="text-link" href={profile.resume} target="_blank" rel="noopener noreferrer">View resume (PDF)<span className="sr-only">, opens in a new tab</span> <span aria-hidden="true">↗</span></a>}
         </div>
       </section>
     </main>
