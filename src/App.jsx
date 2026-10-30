@@ -20,7 +20,11 @@ export default function App() {
       <section id="contact" className="section shell" aria-labelledby="contact-title">
         <p className="eyebrow">Let’s connect</p>
         <h2 id="contact-title">Good things begin<br />with a conversation.</h2>
-        <a className="text-link" href={profile.github}>Find me on GitHub ↗</a>
+        <div className="contact-links">
+          <a className="text-link" href={profile.github}>GitHub <span aria-hidden="true">↗</span></a>
+          {profile.linkedin && <a className="text-link" href={profile.linkedin}>LinkedIn <span aria-hidden="true">↗</span></a>}
+          {profile.resume && <a className="text-link" href={profile.resume}>Resume <span aria-hidden="true">↗</span></a>}
+        </div>
       </section>
     </main>
     <footer className="shell footer"><span>{profile.name}</span><span>Built with care. Rooted in curiosity.</span></footer>
