@@ -27,11 +27,10 @@ test('internal page links and downloadable assets resolve in the static output',
   }
 })
 
-test('homepage includes the signature GIF, reduced-motion still, and working section links', async () => {
+test('homepage includes a single hero image and working section links', async () => {
   const html = await readFile('dist/index.html', 'utf8')
-  assert.match(html, /srcSet="\/impact-animation.gif"/i)
-  assert.match(html, /src="\/impact-still.png"/)
-  assert.match(html, /prefers-reduced-motion: no-preference/)
+  assert.equal([...html.matchAll(/<img[ >]/g)].length, 1)
+  assert.ok(html.includes('src="/engineering-workspace.jpg"'))
   for (const [, anchor] of html.matchAll(/href="\/?#([^"]+)"/g)) {
     assert.ok(html.includes(`id="${anchor}"`), anchor)
   }
