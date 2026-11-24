@@ -5,7 +5,7 @@ test('homepage navigation and résumé download work', async ({ page }) => {
   const errors = []
   page.on('pageerror', (error) => errors.push(error.message))
   await page.goto('/')
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Ruchira Patil')
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Ruchira Patil · Senior Software Engineer')
   await page.getByRole('navigation').getByRole('link', { name: 'Journey' }).click()
   await expect(page).toHaveURL(/#journey$/)
   await expect(page.getByRole('heading', { name: 'Where I am. Where I’m headed.' })).toBeVisible()
@@ -16,13 +16,13 @@ test('homepage navigation and résumé download work', async ({ page }) => {
   expect(errors).toEqual([])
 })
 
-test('the hero shows a single still picture and one introduction', async ({ page }) => {
+test('the hero shows a single still picture and a short title', async ({ page }) => {
   await page.goto('/')
-  const hero = page.getByRole('region', { name: 'Ruchira Patil' })
+  const hero = page.getByRole('region', { name: 'Ruchira Patil · Senior Software Engineer' })
   const image = hero.getByRole('img')
   await expect(image).toHaveCount(1)
   await expect.poll(() => image.evaluate((element) => element.naturalWidth)).toBe(1440)
-  await expect(hero.locator('p')).toHaveCount(1)
+  await expect(hero.locator('p')).toHaveCount(0)
 })
 
 test('homepage fits its viewport and passes automated accessibility checks', async ({ page }) => {
