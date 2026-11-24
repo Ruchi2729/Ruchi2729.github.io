@@ -1,10 +1,10 @@
 export const capabilities = [
-  ['Frontend Engineering', 'Professional experience', 'Server-driven UI, web performance, and Core Web Vitals.'],
-  ['Backend Engineering', 'Professional experience', 'Scalable services and notifications infrastructure.'],
+  ['Frontend Engineering', 'Professional experience', 'React, JavaScript, TypeScript, server-driven UI, and web performance.'],
+  ['Backend Engineering', 'Professional experience', 'Java, Kotlin, API design, and scalable notification services.'],
   ['Full-Stack Product Engineering', 'Professional experience', 'End-to-end ownership across product surfaces and services.'],
-  ['Distributed Systems', 'Professional experience', 'Event-driven architectures and notification workflows.'],
+  ['Distributed Systems', 'Professional experience', 'Event-driven architecture, Kafka pipelines, and notification workflows.'],
   ['Growth and SEO Engineering', 'Professional experience', 'User acquisition, content discovery, and search visibility.'],
-  ['AI and LLM Engineering', 'Professional and independent work', 'On-call automation, collaborative articles, and exploration of agentic workflows and MCP.'],
+  ['AI and LLM Engineering', 'Professional experience and active learning', 'AI collaborative articles at LinkedIn. LLM applications, agentic workflows, and MCP are areas of independent exploration.'],
   ['Machine Learning', 'Independent project plans', 'Anomaly detection and churn prediction in Sentinel and GrowthIQ.'],
   ['Big Data Engineering', 'Independent project plans', 'Streaming and batch analytics in GrowthIQ.'],
   ['Reliability and Observability', 'Professional experience', 'Production reliability, on-call workflows, and observability.'],
@@ -70,20 +70,10 @@ export const articles = [
   {
     id: 'notification-replay', title: 'Designing a safe notification replay workflow', topic: 'Distributed systems · Reliability',
     description: 'How idempotency, audit trails, and dry runs shape a replay tool.',
-    sections: [
-      ['Define the unit of replay', 'Choose whether the operation reprocesses an original event or reruns a specific delivery attempt. An event can fan out to several channels, so the choice determines the scope of downstream effects.'],
-      ['Separate inspection from execution', 'Start with a dry run that shows the selected event, destination, and likely effects. Require explicit authorization for execution, and give each approved run a stable identifier so retries can be deduplicated.'],
-      ['Measure the workflow', 'Track replay counts, duplicate suppression, and denied actions. Exercise replay against a sink populated with synthetic events before testing any production delivery path.'],
-    ],
   },
   {
     id: 'rag-evaluation', title: 'Evaluating retrieval before evaluating answers', topic: 'LLMs · Retrieval-augmented generation',
     description: 'A practical way to isolate retrieval, citation, and answer-quality failures.',
-    sections: [
-      ['Start with a small evidence set', 'Write questions, mark the passages that actually support each answer, and include questions the corpus cannot answer. Keep document versions and access labels with each expected passage.'],
-      ['Score retrieval independently', 'Measure whether relevant passages appear in the first few retrieved results. Check permission boundaries and separate ranking failures from indexing failures.'],
-      ['Check claims against citations', 'Break each answer into claims and verify that each cited passage supports the associated claim. Track abstention separately so the system can improve at recognizing missing evidence.'],
-    ],
   },
 ]
 

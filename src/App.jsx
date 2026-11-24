@@ -1,11 +1,14 @@
 import { useEffect, useRef } from 'react'
 import { Architecture, Scenario } from './components/Architecture.tsx'
+import SignatureAnimation from './components/SignatureAnimation/SignatureAnimation.jsx'
 import { profile } from './data/profile.js'
 import { projects } from './data/projects.js'
 import { articles, capabilities, caseEvidence, cases, lab, timeline } from './data/portfolio.js'
 import { routes } from './routes.js'
 
-const links = [['Experience', '/experience/'], ['Engineering Lab', '/lab/'], ['Writing', '/writing/'], ['Recruiter Hub', '/recruiters/']]
+const journal = import.meta.glob('./journal/*.md', { eager: true, import: 'default' })
+
+const links = [['Experience', '/experience/'], ['Engineering Lab', '/lab/'], ['Technical Journal', '/writing/'], ['About', '/about/'], ['Recruiter Hub', '/recruiters/']]
 
 function ContactLinks() {
   return <div className="actions">
@@ -60,9 +63,10 @@ function Home() {
   return <>
     <div className="hero">
       <div>
-        <p className="eyebrow">Senior Software Engineer at LinkedIn</p>
-        <h1>Engineering scalable systems. <em>Building intelligent products.</em></h1>
-        <p className="lead">I’m Ruchira Patil. I build full-stack products across distributed systems, growth, and applied AI. I own work from the member experience through the services and operational workflows behind it.</p>
+        <p className="eyebrow">From Mindfulness to Meaningful Tech</p>
+        <h1>Calm mind. Complex solutions. <em>Bigger possibilities.</em></h1>
+        <p className="identity">Senior Software Engineer. Builder. Curious Human.</p>
+        <p className="lead">Hi, I’m Ruchira Patil, a Senior Full-Stack Software Engineer at LinkedIn. I have 8+ years of experience building scalable products and distributed systems, and I’m exploring how AI can make difficult work easier.</p>
         <div className="actions">
           <a className="button primary" href="/experience/">Explore experience</a>
           <a className="button" href="/lab/">View projects</a>
@@ -70,17 +74,17 @@ function Home() {
           <a className="button" href={profile.linkedin}>Connect</a>
         </div>
       </div>
-      <aside aria-label="Career highlights" className="highlights">
-        <div><strong>8+ years</strong><span>Software engineering experience</span></div>
-        <div><strong>LinkedIn</strong><span>Growth and Notifications</span></div>
-        <div><strong>Northeastern</strong><span>M.S. in Information Systems</span></div>
-      </aside>
+      <SignatureAnimation />
     </div>
     <section className="section"><div className="section-heading"><h2>Selected LinkedIn work</h2><a href="/experience/">All experience</a></div><Cards items={[cases[1], cases[3], cases[5]]} prefix="experience" heading="h3" /></section>
     <section className="section"><h2>Engineering capabilities</h2><div className="capabilities">
       {capabilities.map(([title, source, detail]) => <details key={title}><summary>{title}</summary><p className="eyebrow">{source}</p><p>{detail}</p></details>)}
     </div></section>
     <section className="section"><div className="section-heading"><h2>Engineering Lab</h2><a href="/lab/">Browse projects</a></div><Cards items={lab} prefix="lab" heading="h3" /></section>
+    <section className="section personal-note">
+      <div><h2>Curiosity, kindness, and ambition</h2><p className="lead">I believe great technology begins with curiosity, grows through collaboration, and finds its purpose in improving people’s lives. I want to build useful products and help the people around me grow along the way.</p></div>
+      <div className="actions"><a className="button" href="/about/">About me</a><a className="button" href="/beyond-tech/">Beyond Tech</a><a className="button" href="/vision/">My vision</a></div>
+    </section>
   </>
 }
 
@@ -121,11 +125,11 @@ function Lab({ item }) {
 }
 
 function Writing({ item }) {
-  if (!item) return <><Intro eyebrow="Engineering notes" title="Technical writing"><p className="lead">Draft articles on distributed systems and applied AI.</p></Intro><Cards items={articles} prefix="writing" /></>
+  if (!item) return <><Intro eyebrow="Engineering notes" title="Technical Journal"><p className="lead">Draft articles on distributed systems and applied AI.</p></Intro><Cards items={articles} prefix="writing" /></>
   return <article className="reading">
-    <a href="/writing/">All writing</a>
+    <a href="/writing/">Technical Journal</a>
     <Intro eyebrow={`${item.topic} · Draft`} title={item.title}><p className="lead">{item.description}</p></Intro>
-    {item.sections.map(([title, copy]) => <section key={title}><h2>{title}</h2><p>{copy}</p></section>)}
+    <div className="journal-body" dangerouslySetInnerHTML={{ __html: journal[`./journal/${item.id}.md`] }} />
   </article>
 }
 
@@ -144,18 +148,38 @@ function Recruiters() {
   </>
 }
 
+function Personal({ route }) {
+  return <article className="reading">
+    <Intro eyebrow={route.title} title={route.headline}><p className="lead">{route.intro}</p></Intro>
+    {route.sections.map(([title, copy]) => <section key={title}><h2>{title}</h2><p>{copy}</p></section>)}
+    <nav className="actions" aria-label="Personal pages">
+      {[['About', '/about/'], ['Beyond Tech', '/beyond-tech/'], ['Vision', '/vision/'], ['Contact', '/contact/']]
+        .filter(([, href]) => href !== route.path)
+        .map(([label, href]) => <a className="button" key={href} href={href}>{label}</a>)}
+    </nav>
+  </article>
+}
+
+function Contact() {
+  return <Intro eyebrow="Contact" title="Let’s connect">
+    <p className="lead">I’d love to hear from teams building thoughtful products, reliable systems, or useful AI tools.</p>
+    <p><a href="mailto:ru91patil@gmail.com">ru91patil@gmail.com</a></p>
+    <ContactLinks />
+  </Intro>
+}
+
 export default function App({ pathname = window.location.pathname }) {
   const path = pathname.endsWith('/') ? pathname : `${pathname}/`
   const route = routes.find((entry) => entry.path === path)
   const section = path.split('/')[1]
-  const pages = { experience: Experience, lab: Lab, writing: Writing, recruiters: Recruiters }
-  const Page = pages[section] || Home
+  const pages = { experience: Experience, lab: Lab, writing: Writing, recruiters: Recruiters, contact: Contact }
+  const Page = route?.sections ? Personal : pages[section] || Home
   return <>
     <a className="skip-link" href="#main">Skip to content</a>
     <Header path={path} />
     <main className="shell" id="main" tabIndex={-1}>
-      {route ? <Page item={route.item} /> : <Intro eyebrow="404" title="Page not found"><a href="/">Return home</a></Intro>}
+      {route ? <Page item={route.item} route={route} /> : <Intro eyebrow="404" title="Page not found"><a href="/">Return home</a></Intro>}
     </main>
-    <footer className="shell footer"><a href="/">{profile.name}</a><a href="/recruiters/">Recruiter Hub</a><a href={profile.linkedin}>LinkedIn</a><a href={profile.github}>GitHub</a></footer>
+    <footer className="shell footer"><a href="/">{profile.name}</a><nav aria-label="More pages"><a href="/beyond-tech/">Beyond Tech</a><a href="/vision/">Vision</a><a href="/contact/">Contact</a><a href={profile.resume} download>Résumé</a></nav></footer>
   </>
 }

@@ -40,7 +40,7 @@ main { min-height: 65vh; padding-block: clamp(2rem, 6vw, 5rem); }
 nav a { color: var(--muted); font-weight: 650; text-decoration: none; }
 nav a:hover, nav a[aria-current] { color: var(--accent); text-decoration: underline; }
 select { padding: .45rem .65rem; border: 1px solid var(--line); border-radius: .35rem; background: var(--panel); color: var(--ink); }
-.hero { display: grid; grid-template-columns: minmax(0, 2.6fr) minmax(13rem, 1fr); align-items: end; gap: clamp(1.5rem, 4vw, 4rem); padding-block: clamp(1rem, 4vw, 3rem); }
+.hero { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); align-items: center; gap: clamp(1.5rem, 4vw, 4rem); padding-block: clamp(1rem, 4vw, 3rem); }
 h1, h2 { font-family: Georgia, serif; font-weight: 500; line-height: 1.04; letter-spacing: -.04em; text-wrap: balance; }
 h1 { font-size: clamp(2.75rem, 6.6vw, 6rem); margin: .55rem 0 1.35rem; }
 h1 em { display: block; color: var(--accent); }
@@ -49,12 +49,9 @@ h3 { font-size: 1.2rem; font-weight: 750; line-height: 1.3; }
 p { margin-block: .45rem; }
 .lead { max-width: 60ch; color: var(--muted); font-size: clamp(1.1rem, 2vw, 1.3rem); }
 .eyebrow { font-size: .875rem; color: var(--accent); font-weight: 750; }
-.highlights { border-top: 2px solid var(--accent); padding-inline: 1.15rem; background: var(--wash); }
-.highlights div { padding-block: 1rem; }
-.highlights div + div { border-top: 1px solid var(--line); }
-.highlights strong, .highlights span { display: block; }
-.highlights strong { font-family: Georgia, serif; font-size: 1.65rem; font-weight: 500; }
-.highlights span { color: var(--muted); }
+.identity { font-weight: 750; font-size: 1.05rem; }
+.personal-note .actions { margin-bottom: .5rem; }
+.footer nav { display: flex; flex-wrap: wrap; gap: .7rem 1.3rem; }
 .actions { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1.4rem; }
 .button { padding: .55rem .85rem; color: var(--ink); background: var(--panel); font-weight: 700; border: 1px solid var(--line); border-radius: .35rem; text-decoration: none; }
 .button.primary { color: var(--on-accent); background: var(--accent); border-color: var(--accent); }
@@ -94,7 +91,7 @@ ul { list-style: disc; padding-inline-start: 1.3rem; }
 @media (max-width: 39rem) {
   .shell { width: calc(100% - 2rem); }
   .hero, .cards, .capabilities, .recruiter-grid { grid-template-columns: minmax(0, 1fr); }
-  .highlights { padding-inline: .85rem; }
+  .signature { max-width: 25rem; }
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -27,6 +27,8 @@ The static tests check generated pages, metadata, links, and status labels. Play
 
 - `src/data/profile.js` holds the verified résumé and profile links. The PDF lives in `public/`.
 - `src/data/portfolio.js` holds capabilities, the timeline, case-study summaries, lab designs, and writing drafts.
+- `src/data/personal.js` holds the About, Beyond Tech, and Vision copy.
+- Add a Markdown file to `src/journal/` and register its matching slug, title, topic, and description in the `articles` list in `src/data/portfolio.js`. Start article sections with level-two headings. The renderer escapes inline HTML.
 - `src/routes.js` defines public URLs and per-page metadata. Add an entry here when adding a page.
 - `src/components/Architecture.tsx` contains the interactive workflow and scenario controls.
 - `scripts/prerender.mjs` renders static route files, canonical tags, structured data, a sitemap, and a 404 document.

@@ -6,8 +6,8 @@ test('recruiter navigation, résumé, and saved theme work', async ({ page }) =>
   const errors = []
   page.on('pageerror', (error) => errors.push(error.message))
   await page.goto('/')
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Engineering scalable systems.')
-  await page.getByRole('navigation').getByRole('link', { name: 'Recruiter Hub' }).click()
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Calm mind. Complex solutions.')
+  await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Recruiter Hub' }).click()
   await expect(page).toHaveURL(/\/recruiters\/$/)
   await expect(page.getByRole('heading', { name: 'Career timeline' })).toBeVisible()
   const download = page.waitForEvent('download')
@@ -40,3 +40,22 @@ for (const { path } of routes) {
     expect((await new AxeBuilder({ page }).analyze()).violations.map(({ id, nodes }) => [id, nodes.map(({ target }) => target)])).toEqual([])
   })
 }
+
+test('the signature story supports skipping, replaying, and manual scene selection', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: 'Skip animation' }).click()
+  await expect(page.getByRole('button', { name: 'Possibilities' })).toHaveAttribute('aria-pressed', 'true')
+  await page.getByRole('button', { name: 'Replay animation' }).click()
+  await expect(page.getByRole('button', { name: 'Breathe' })).toHaveAttribute('aria-pressed', 'true')
+  await page.getByRole('button', { name: 'Create', exact: true }).click()
+  await expect(page.getByText('Ideas. Code. Impact.')).toBeVisible()
+})
+
+test('reduced motion keeps the story still and allows manual scenes', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await page.goto('/')
+  await expect(page.getByRole('button', { name: 'Replay animation' })).toBeHidden()
+  await expect(page.getByRole('button', { name: 'Breathe' })).toHaveAttribute('aria-pressed', 'true')
+  await page.getByRole('button', { name: 'Rise' }).click()
+  await expect(page.getByText('Rise. Learn. Build.')).toBeVisible()
+})
