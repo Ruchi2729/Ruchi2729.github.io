@@ -21,12 +21,12 @@ npx playwright install chromium
 npm run test:browser
 ```
 
-The static tests check generated pages, metadata, links, and status labels. Playwright checks direct navigation, responsive layouts, résumé download, diagrams, scenarios, and persisted theme selection. Axe scans each public route in light and dark mode.
+The static tests check generated pages, metadata, and links. Playwright checks direct navigation, responsive layouts, résumé download, diagrams, and persisted theme selection. Axe scans each public route in light and dark mode.
 
 ## Content and routing
 
 - `src/data/profile.js` holds the verified résumé and profile links. The PDF lives in `public/`.
-- `src/data/portfolio.js` holds capabilities, the timeline, case-study summaries, lab designs, and writing drafts.
+- `src/data/portfolio.js` holds capabilities, the timeline, case-study summaries and writing drafts.
 - `src/data/personal.js` holds the About, Beyond Tech, and Vision copy.
 - Add a Markdown file to `src/journal/` and register its matching slug, title, topic, and description in the `articles` list in `src/data/portfolio.js`. Start article sections with level-two headings. The renderer escapes inline HTML.
 - `src/routes.js` defines public URLs and per-page metadata. Add an entry here when adding a page.
@@ -34,7 +34,5 @@ The static tests check generated pages, metadata, links, and status labels. Play
 - `scripts/prerender.mjs` renders static route files, canonical tags, structured data, a sitemap, and a 404 document.
 
 LinkedIn summaries are grounded in the supplied résumé and project brief. Workflow diagrams on employer pages are illustrative. Confirm responsibilities, technologies, and outcomes before expanding the two case studies pending review. Keep the draft labels on writing until the owner has reviewed the copy.
-
-The three flagship applications are planned as separate repositories. The lab pages contain proposed designs and synthetic interactions. Update project status and add repository URLs, screenshots, demos, and measured benchmarks as each application becomes available.
 
 GitHub Actions runs checks on pull requests. The existing GitHub Pages workflow deploys from `master`. The review branch can be built and tested locally without publishing.

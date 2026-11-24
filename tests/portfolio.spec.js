@@ -20,12 +20,11 @@ test('recruiter navigation, résumé, and saved theme work', async ({ page }) =>
   expect(errors).toEqual([])
 })
 
-test('architecture and synthetic scenarios respond to input', async ({ page }) => {
-  await page.goto('/lab/sentinel/')
-  await page.getByRole('button', { name: 'Incident correlation' }).click()
-  await expect(page.getByRole('button', { name: 'Incident correlation' })).toHaveAttribute('aria-pressed', 'true')
-  await page.getByLabel('Scenario').selectOption({ label: 'Queue lag increased' })
-  await expect(page.getByText('Compare consumer throughput', { exact: false })).toBeVisible()
+test('case study architecture responds to input', async ({ page }) => {
+  await page.goto('/experience/server-driven-ui/')
+  const renderer = page.getByRole('button', { name: 'Client renderer' })
+  await renderer.click()
+  await expect(renderer).toHaveAttribute('aria-pressed', 'true')
 })
 
 for (const { path } of routes) {

@@ -26,13 +26,10 @@ test('internal page links and downloadable assets resolve in the static output',
   }
 })
 
-test('project pages disclose planned status and simulated previews', async () => {
-  for (const path of ['/lab/sentinel/', '/lab/growthiq/', '/lab/cortex/']) {
-    const html = await readFile(join('dist', path, 'index.html'), 'utf8')
-    assert.match(html, /Planned/)
-    assert.match(html, /Synthetic examples/)
-    assert.match(html, /benchmarks are pending implementation/)
-  }
+test('the retired lab is excluded from the public build and sitemap', async () => {
+  await assert.rejects(stat('dist/lab'), { code: 'ENOENT' })
+  const sitemap = await readFile('dist/sitemap.xml', 'utf8')
+  assert.equal(sitemap.includes('/lab/'), false)
 })
 
 test('missing pages carry a noindex directive', async () => {

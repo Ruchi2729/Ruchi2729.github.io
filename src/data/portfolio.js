@@ -5,8 +5,6 @@ export const capabilities = [
   ['Distributed Systems', 'Professional experience', 'Event-driven architecture, Kafka pipelines, and notification workflows.'],
   ['Growth and SEO Engineering', 'Professional experience', 'User acquisition, content discovery, and search visibility.'],
   ['AI and LLM Engineering', 'Professional experience and active learning', 'AI collaborative articles at LinkedIn. LLM applications, agentic workflows, and MCP are areas of independent exploration.'],
-  ['Machine Learning', 'Independent project plans', 'Anomaly detection and churn prediction in Sentinel and GrowthIQ.'],
-  ['Big Data Engineering', 'Independent project plans', 'Streaming and batch analytics in GrowthIQ.'],
   ['Reliability and Observability', 'Professional experience', 'Production reliability, on-call workflows, and observability.'],
   ['System Design and Architecture', 'Professional experience', 'Frontend architecture, distributed services, and migration design.'],
   ['Technical Leadership', 'Professional experience', 'End-to-end technical and product ownership.'],
@@ -23,48 +21,6 @@ export const cases = [
   ['collaborative-articles', 'AI Collaborative Articles', 'AI product engineering', 'How can AI-assisted content and member contributions come together in one product?', 'AI-assisted topic|Contributor input|Published article', 'Where does contributor expertise add the most value?'],
   ['web-performance', 'Web Performance and Core Web Vitals', 'Web performance', 'How can web experiences load quickly, respond promptly, and stay visually stable?', 'Page load|Interaction|Field measurement', 'Which fixes improve the experience across user cohorts?'],
 ].map(([id, title, area, problem, flow, tradeoff]) => ({ id, title, area, problem, flow: flow.split('|'), tradeoff }))
-
-export const lab = [
-  {
-    id: 'sentinel', title: 'Sentinel', area: 'AI-powered incident intelligence',
-    description: 'Correlate operational events and guide on-call engineers through incident investigations.',
-    flow: ['Event ingestion', 'Kafka and anomaly detection', 'Incident correlation', 'AI investigation and review'],
-    features: ['Real-time ingestion and Kafka processing', 'ML anomaly detection and incident correlation', 'MCP investigation tools and streaming LLM responses', 'Observability dashboards and human-reviewed remediation'],
-    stack: 'Kafka, Python, PostgreSQL, React and MCP',
-    model: 'Event → Signal → Incident → Investigation',
-    api: 'POST /events · GET /incidents/{id} · GET /investigations/{id}/stream',
-    tradeoff: 'Partition by service to scale ingestion. Use event keys for deduplication and require approval before any remediation.',
-    testing: 'Replay synthetic incidents with duplicate and late events. Measure ingestion lag, correlation delay, and time to first response token.',
-    roadmap: 'Ingestion and event replay → anomaly detection and correlation → investigation interface and MCP integration.',
-    samples: [['Checkout latency increased', 'A rise in downstream timeout events warrants a review of dependency timing.'], ['Queue lag increased', 'Compare consumer throughput and event arrival rates before changing capacity.']],
-  },
-  {
-    id: 'growthiq', title: 'GrowthIQ', area: 'Predictive product analytics',
-    description: 'Turn behavioral events into funnel, retention, and experimentation insights.',
-    flow: ['Behavioral events', 'Stream and batch processing', 'Analytics and ML', 'Analyst dashboard'],
-    features: ['Real-time behavioral event ingestion', 'Batch and stream processing', 'Segmentation, funnels, and churn prediction', 'A/B test analytics and AI-generated business insights'],
-    stack: 'Kafka, Python, DuckDB, PostgreSQL and React',
-    model: 'Behavioral event → Session → Cohort → Experiment assignment',
-    api: 'POST /events · GET /funnels/{id} · GET /experiments/{id}/results',
-    tradeoff: 'Use streaming for freshness and batch recomputation for corrections. Keep personal identifiers out of synthetic datasets and restrict access to event-level data.',
-    testing: 'Validate event ordering, attribution, experiment assignment, and temporal model splits. Measure data freshness and dashboard query latency.',
-    roadmap: 'Event schema and ingestion → cohorts and funnels → churn models and experiment reporting.',
-    samples: [['Signup funnel', 'In this synthetic scenario, the largest drop is between signup and activation.'], ['Experiment review', 'In this synthetic scenario, exposure counts warrant an assignment-ratio check.']],
-  },
-  {
-    id: 'cortex', title: 'Cortex', area: 'Enterprise knowledge intelligence',
-    description: 'Help teams find answers across documents and trace each answer to its sources.',
-    flow: ['Document import', 'Chunking and indexing', 'Hybrid retrieval', 'Cited answer stream'],
-    features: ['Asynchronous document ingestion, chunking, and embeddings', 'Vector and hybrid search with RAG', 'Agent orchestration, tool calling, and cited streaming answers', 'Conversation history, role-based access, and hallucination monitoring'],
-    stack: 'Python, PostgreSQL with pgvector, a job queue, and React',
-    model: 'Document → Chunk → Citation · Conversation → Message',
-    api: 'POST /documents · GET /ingestion/{id} · POST /conversations/{id}/messages',
-    tradeoff: 'Filter retrieval by access permissions before ranking. Preserve document versions so citations can be traced after reindexing.',
-    testing: 'Test access isolation, citation integrity, and ambiguous queries. Track retrieval recall, groundedness, and time to first token.',
-    roadmap: 'Document ingestion and permissions → hybrid retrieval and citations → tool use and evaluation.',
-    samples: [['Where is the rollout policy?', 'Synthetic source: Release Handbook, section 3, “Staged rollouts.”'], ['Who can access the handbook?', 'Synthetic source: Access Policy, section 2, “Engineering readers.”']],
-  },
-].map((project) => ({ ...project, status: 'Planned' }))
 
 export const articles = [
   {

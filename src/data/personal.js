@@ -27,7 +27,7 @@ export const personalPages = [
     description: 'Ruchira Patil’s goals for useful AI, ambitious engineering, and contribution to others.',
     intro: 'I want to build technology that makes people’s lives better in ways they can actually feel. Right now I’m drawn to AI tools that help people investigate a problem, find trustworthy information, or get through a complicated task.',
     sections: [
-      ['Grow as a builder', 'I want to deepen my understanding of distributed systems, AI, and product decisions. The Engineering Lab is where I plan to turn those questions into designs I can build, test, and learn from.'],
+      ['Grow as a builder', 'I want to deepen my understanding of distributed systems, AI, and product decisions.'],
       ['Make room for others to grow', 'I want my work to contribute to the people and communities around me. That includes sharing what I learn, mentoring other engineers, and making it easier for teammates to ask questions and challenge ideas.'],
     ],
   },
