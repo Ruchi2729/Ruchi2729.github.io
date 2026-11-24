@@ -19,23 +19,22 @@ function looseHairPath(x, y) {
     C${x - 28} ${y + 7} ${x - 20} ${y + 3} ${x - 19} ${y - 5} Z`
 }
 
-function Limb({ progress, values, width, reducedMotion }) {
+function Limb({ progress, values, width }) {
   const points = useTransform(progress, stops, values)
-  return <motion.polyline points={reducedMotion ? values[3] : points} fill="none" strokeWidth={width} />
+  return <motion.polyline points={points} fill="none" strokeWidth={width} />
 }
 
-export default function Silhouette({ progress, reducedMotion }) {
+export default function Silhouette({ progress }) {
   const x = useTransform(progress, stops, scenes.map(scene => scene.head[0]))
   const y = useTransform(progress, stops, scenes.map(scene => scene.head[1]))
   const hair = useTransform([x, y], ([cx, cy]) => looseHairPath(cx, cy))
   const neck = useTransform([x, y], ([cx, cy]) => `M${cx} ${cy + 12}v20`)
-  const final = scenes[3].head
   return <g fill="var(--ink)" stroke="var(--ink)" strokeLinecap="round" strokeLinejoin="round">
-    <motion.path d={reducedMotion ? looseHairPath(...final) : hair} stroke="none" />
-    <motion.circle cx={reducedMotion ? final[0] : x} cy={reducedMotion ? final[1] : y} r="16" stroke="none" />
-    <motion.path d={reducedMotion ? `M${final[0]} ${final[1] + 12}v20` : neck} strokeWidth="11" />
-    <Limb progress={progress} reducedMotion={reducedMotion} values={scenes.map(scene => scene.torso)} width={27} />
-    {[0, 1].map(index => <Limb key={`arm-${index}`} progress={progress} reducedMotion={reducedMotion} values={scenes.map(scene => scene.arms[index])} width={11} />)}
-    {[0, 1].map(index => <Limb key={`leg-${index}`} progress={progress} reducedMotion={reducedMotion} values={scenes.map(scene => scene.legs[index])} width={14} />)}
+    <motion.path d={hair} stroke="none" />
+    <motion.circle cx={x} cy={y} r="16" stroke="none" />
+    <motion.path d={neck} strokeWidth="11" />
+    <Limb progress={progress} values={scenes.map(scene => scene.torso)} width={27} />
+    {[0, 1].map(index => <Limb key={`arm-${index}`} progress={progress} values={scenes.map(scene => scene.arms[index])} width={11} />)}
+    {[0, 1].map(index => <Limb key={`leg-${index}`} progress={progress} values={scenes.map(scene => scene.legs[index])} width={14} />)}
   </g>
 }
