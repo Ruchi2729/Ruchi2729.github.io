@@ -7,7 +7,7 @@ function Home() {
     <>
       <section className="hero" aria-labelledby="hero-title">
         <img className="hero-photo" src="/engineering-workspace.jpg" alt="A hologram of a systems diagram and a neural network rising from a notebook in a workspace at dusk." width="1440" height="810" fetchPriority="high" />
-        <h1 id="hero-title" className="shell">Experienced Software Engineer <span>· Full-Stack Engineering, Systems &amp; Infrastructure, and Distributed Systems</span></h1>
+        <h1 id="hero-title" className="shell">Senior Software Engineer, Full Stack Engineer, Distributed Systems and Infra</h1>
       </section>
       <section id="journey" className="journey shell" aria-labelledby="journey-title">
         <h2 id="journey-title">Where I am.<br /><em>Where I’m headed.</em></h2>

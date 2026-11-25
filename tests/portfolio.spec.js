@@ -5,7 +5,7 @@ test('homepage navigation and résumé download work', async ({ page }) => {
   const errors = []
   page.on('pageerror', (error) => errors.push(error.message))
   await page.goto('/')
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Experienced Software Engineer · Full-Stack Engineering, Systems & Infrastructure, and Distributed Systems')
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Senior Software Engineer, Full Stack Engineer, Distributed Systems and Infra')
   await page.getByRole('navigation').getByRole('link', { name: 'Journey' }).click()
   await expect(page).toHaveURL(/#journey$/)
   await expect(page.getByRole('heading', { name: 'Where I am. Where I’m headed.' })).toBeVisible()
@@ -18,7 +18,7 @@ test('homepage navigation and résumé download work', async ({ page }) => {
 
 test('the hero shows a single still picture and a short title', async ({ page }) => {
   await page.goto('/')
-  const hero = page.getByRole('region', { name: 'Experienced Software Engineer · Full-Stack Engineering, Systems & Infrastructure, and Distributed Systems' })
+  const hero = page.getByRole('region', { name: 'Senior Software Engineer, Full Stack Engineer, Distributed Systems and Infra' })
   const image = hero.getByRole('img')
   await expect(image).toHaveCount(1)
   expect((await image.boundingBox()).width).toBe(page.viewportSize().width)
