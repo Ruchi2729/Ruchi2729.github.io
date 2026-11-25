@@ -7,16 +7,16 @@ function Home() {
     <>
       <section className="hero" aria-labelledby="hero-title">
         <img className="hero-photo" src="/engineering-workspace.jpg" alt="A hologram of a systems diagram and a neural network rising from a notebook in a workspace at dusk." width="1440" height="810" fetchPriority="high" />
-        <h1 id="hero-title">{profile.name} <span>· Senior Software Engineer</span></h1>
+        <h1 id="hero-title" className="shell">Experienced Software Engineer <span>· Full-Stack Engineering, Systems &amp; Infrastructure, and Distributed Systems</span></h1>
       </section>
-      <section id="journey" className="journey" aria-labelledby="journey-title">
+      <section id="journey" className="journey shell" aria-labelledby="journey-title">
         <h2 id="journey-title">Where I am.<br /><em>Where I’m headed.</em></h2>
         <div className="journey-copy">
           <p>I’m an experienced software engineer. For 8+ years, I’ve built full-stack products and large-scale distributed systems, working across React, TypeScript, Java, Kotlin, GraphQL, and Kafka.</p>
           <p>I’m looking for meaningful problems in healthcare, mental health, ADHD, neuroscience, and scientific research. If you know a problem firsthand, I’d love to hear what takes too much time or what tool you wish existed.</p>
         </div>
       </section>
-      <section id="contact" className="contact" aria-labelledby="contact-title">
+      <section id="contact" className="contact shell" aria-labelledby="contact-title">
         <div>
           <h2 id="contact-title">Let’s build something useful.</h2>
           <p>I’m also open to conversations about building an intellectually fulfilling, sustainable career.</p>
@@ -42,10 +42,10 @@ export default function App({ pathname = window.location.pathname }) {
           <a href="/#contact">Contact</a>
         </nav>
       </header>
-      <main id="main" className="shell" tabIndex={-1}>
-        {isHome ? <Home /> : <section className="missing"><h1>Page not found</h1><a href="/">Back to the homepage</a></section>}
+      <main id="main" tabIndex={-1}>
+        {isHome ? <Home /> : <section className="missing shell"><h1>Page not found</h1><a href="/">Back to the homepage</a></section>}
       </main>
-      <footer className="site-footer shell"><span>{profile.name}</span><a href={profile.resume} download>Résumé</a></footer>
+      <footer className="site-footer shell"><a href={profile.resume} download>Résumé</a></footer>
     </>
   )
 }
